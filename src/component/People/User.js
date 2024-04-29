@@ -93,6 +93,7 @@ const User = (props) => {
 
   const openModelForGeneratingRandomId = () => {
     setCallee({});
+    setLoading(false);
     openModalRef.current.click();
   }
 
@@ -104,8 +105,10 @@ const User = (props) => {
     event.stopPropagation();
     setLoading(true); // Start loading
     const response = await placeRandomVideoCall(user[0]?.id);
+    console.log(response);
     const data = await response.json();
-    if (data) {
+    // console.log("DATA : ",data);
+    if (data!==null) {
       setCallee(data);
     }
     setLoading(false); // Stop loading
@@ -198,7 +201,7 @@ const User = (props) => {
                   id="outlined-required"
                   label="Callee Name"
                   name="calleeName"
-                  value={loading ? 'Loading...' : callee.userName ? callee.firstName + " " + callee.lastName : " "}
+                  value={loading ? 'Loading...' : callee.userName ? callee.firstName + " " + callee.lastName : "No User is online! "}
                   InputProps={{
                     readOnly: true
                   }}

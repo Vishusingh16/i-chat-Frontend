@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 
 const RemoteVideo = ({ stream }) => {
     useEffect(() => {
+        if (!stream) return; 
         const videoTrack = stream && stream.getVideoTracks()[0];
         const videoElement = document.getElementById('remoteVideo');
         if (videoElement && videoTrack) {
